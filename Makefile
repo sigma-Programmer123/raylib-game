@@ -1,5 +1,5 @@
 CXX = emcc
-CXXFLAGS = -Wall -Werror -std=c++11
+CXXFLAGS = -Wall -Werror -std=c++11 DPLATFORM_WEB -Iraylib/src
 CXX_LIB_FLAGS = raylib/src/libraylib.a -s USE_GLFW=3 -s ALLOW_MEMORY_GROWTH=1
 
 # Directories
