@@ -2,7 +2,7 @@
 
 void DrawUpdatedFrame() {
     BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(DARKGRAY);
         DrawText("Hello, world! (on mobile)", 640, 540, 64,
                  RAYWHITE);
     EndDrawing();
@@ -10,7 +10,7 @@ void DrawUpdatedFrame() {
 
 int main(void) {
 #ifdef __EMSCRIPTEN__
-    emscripten_set_main_loop(DrawUpdatedFrame, 0, 1);
+    emscripten_set_main_loop(DrawUpdatedFrame, 60, 1);
 #else
     SetTargetFPS(60);
     Window window(1920, 1080, "I HATE THIS");
