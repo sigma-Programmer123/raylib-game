@@ -16,12 +16,23 @@ jobs:
         with:
           version: latest
 
+      - name: Clone Raylib Source
+        uses: actions/checkout@v4
+        with:
+          repository: raysan5/raylib
+          path: raylib
+
+      - name: Build Raylib for Web
+        run: |
+          cd raylib/src
+          emmake make PLATFORM=PLATFORM_WEB -j4
+
       - name: Compile Game
         run: |
-          # Replace main.cpp with your actual source file name if different
           emcc main.cpp -o index.html -Wall -std=c++17 \
               -DPLATFORM_WEB \
-              -lraylib \
+              -Iraylib/src \
+              raylib/src/libraylib.a \
               -s USE_GLFW=3 \
               -s ALLOW_MEMORY_GROWTH=1
 
