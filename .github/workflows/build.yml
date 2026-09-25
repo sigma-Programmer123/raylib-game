@@ -26,19 +26,14 @@ jobs:
         run: |
           cd raylib/src
           emmake make PLATFORM=PLATFORM_WEB -j4
-          # Automatically handle newer Raylib web library naming convention
           if [ -f libraylib.web.a ]; then
             cp libraylib.web.a libraylib.a
           fi
 
-      - name: Compile Game
+      - name: Build Game via Makefile
         run: |
-          emcc main.cpp -o index.html -Wall -std=c++17 \
-              -DPLATFORM_WEB \
-              -Iraylib/src \
-              raylib/src/libraylib.a \
-              -s USE_GLFW=3 \
-              -s ALLOW_MEMORY_GROWTH=1
+          # This runs your Makefile which compiles all your cpp files and links Raylib automatically!
+          make
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
