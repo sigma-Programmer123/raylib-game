@@ -26,6 +26,10 @@ jobs:
         run: |
           cd raylib/src
           emmake make PLATFORM=PLATFORM_WEB -j4
+          # Automatically handle newer Raylib web library naming convention
+          if [ -f libraylib.web.a ]; then
+            cp libraylib.web.a libraylib.a
+          fi
 
       - name: Compile Game
         run: |
