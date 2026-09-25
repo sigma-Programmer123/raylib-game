@@ -1,0 +1,45 @@
+name: Compile Raylib to WebAssembly
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: latest
+
+      - name: Compile Game
+        run: |
+          # Replace main.cpp with your actual source file name if different
+          emcc main.cpp -o index.html -Wall -std=c++17 \
+              -DPLATFORM_WEB \
+              -lraylib \
+              -s USE_GLFW=3 \
+              -s ALLOW_MEMORY_GROWTH=1
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
