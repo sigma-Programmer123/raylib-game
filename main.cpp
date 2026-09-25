@@ -3,18 +3,17 @@
 void DrawUpdatedFrame() {
     BeginDrawing();
         ClearBackground(DARKGRAY);
-        DrawText("Hello, world! (on mobile)", 640, 540, 64,
+        DrawText("Hello, world! (on mobile)", 100, 225, 32,
                  RAYWHITE);
     EndDrawing();
 }
 
 int main(void) {
-    Window window(1920, 1080, "I HATE THIS");
+    Window window(800, 450, "I HATE THIS");
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(DrawUpdatedFrame, 60, 1);
 #else
     SetTargetFPS(60);
-    Window window(1920, 1080, "I HATE THIS");
     while (!window.ShouldClose()) {
         DrawUpdatedFrame();
     }
