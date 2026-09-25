@@ -9,6 +9,7 @@ void DrawUpdatedFrame() {
 }
 
 int main(void) {
+    Window window(1920, 1080, "I HATE THIS");
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(DrawUpdatedFrame, 60, 1);
 #else
