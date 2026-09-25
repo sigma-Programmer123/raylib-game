@@ -1,6 +1,6 @@
 CXX = emcc
 CXXFLAGS = -Wall -Werror -std=c++17 -DPLATFORM_WEB -Iraylib/src
-LDFLAGS = raylib/src/libraylib.a -s USE_GLFW=3 -s ALLOW_MEMORY_GROWTH=1
+LDFLAGS = LDFLAGS = raylib/src/libraylib.a -s USE_GLFW=3 -s ALLOW_MEMORY_GROWTH=1 --shell-file shell.html
 
 # Directories
 SRC_DIR = src
